@@ -1,0 +1,126 @@
+@page "/diseases"
+@using DogsInfo.Models
+@using DogsInfo.Components
+
+<PageTitle>Dog Diseases</PageTitle>
+
+<h1>Common Dog Diseases</h1>
+
+<p class="lead mb-4">Learn about common health issues that can affect dogs. Click on each disease to see more details.</p>
+
+<div class="accordion" id="diseasesAccordion">
+    @foreach (var (disease, index) in diseases.Select((d, i) => (d, i)))
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading@(index)">
+                <button class="accordion-button @(index != 0 ? "collapsed" : "")" type="button" 
+                        data-bs-toggle="collapse" data-bs-target="#collapse@(index)" 
+                        aria-expanded="@(index == 0 ? "true" : "false")" aria-controls="collapse@(index)">
+                    <span class="me-3">@disease.Name</span>
+                    <SeverityBadge Severity="@disease.Severity" />
+                </button>
+            </h2>
+            <div id="collapse@(index)" class="accordion-collapse collapse @(index == 0 ? "show" : "")" 
+                 aria-labelledby="heading@(index)" data-bs-parent="#diseasesAccordion">
+                <div class="accordion-body">
+                    <h5>Description</h5>
+                    <p>@disease.Description</p>
+                    
+                    <h5>Symptoms</h5>
+                    <p>@disease.Symptoms</p>
+                    
+                    <h5>Suggested Action</h5>
+                    <p class="mb-0">
+                        <span class="badge bg-primary">@disease.SuggestedAction</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Disease> diseases = new()
+    {
+        new Disease
+        {
+            Name = "Canine Parvovirus",
+            Description = "A highly contagious viral disease that affects dogs, particularly puppies. It attacks the gastrointestinal system and can be life-threatening.",
+            Symptoms = "Severe vomiting, bloody diarrhea, loss of appetite, lethargy, fever, and rapid weight loss.",
+            SuggestedAction = "See a vet immediately",
+            Severity = "High"
+        },
+        new Disease
+        {
+            Name = "Kennel Cough",
+            Description = "A highly contagious respiratory infection commonly spread in places where dogs congregate, such as kennels, dog parks, and shelters.",
+            Symptoms = "Persistent dry, hacking cough, sneezing, runny nose, eye discharge, and occasionally mild fever.",
+            SuggestedAction = "See a vet within 24-48 hours",
+            Severity = "Moderate"
+        },
+        new Disease
+        {
+            Name = "Hip Dysplasia",
+            Description = "A genetic condition where the hip joint doesn't develop properly, leading to arthritis and pain. Common in larger breeds.",
+            Symptoms = "Difficulty rising, reluctance to run or jump, limping, decreased activity, and loss of muscle mass in the thighs.",
+            SuggestedAction = "See a vet for assessment",
+            Severity = "Moderate"
+        },
+        new Disease
+        {
+            Name = "Ear Infections",
+            Description = "Common in dogs with floppy ears or those that swim frequently. Can be caused by bacteria, yeast, or ear mites.",
+            Symptoms = "Head shaking, scratching at ears, redness, odor, discharge, and pain when ears are touched.",
+            SuggestedAction = "See a vet for proper treatment",
+            Severity = "Low"
+        },
+        new Disease
+        {
+            Name = "Diabetes Mellitus",
+            Description = "A metabolic disorder where the body cannot properly regulate blood sugar levels. More common in middle-aged and older dogs.",
+            Symptoms = "Increased thirst and urination, weight loss despite increased appetite, lethargy, and cloudy eyes.",
+            SuggestedAction = "See a vet for diagnosis and management",
+            Severity = "High"
+        },
+        new Disease
+        {
+            Name = "Heartworm Disease",
+            Description = "A serious and potentially fatal disease caused by parasitic worms living in the heart and lungs. Transmitted by mosquitoes.",
+            Symptoms = "Mild persistent cough, fatigue, decreased appetite, weight loss, and difficulty breathing in advanced stages.",
+            SuggestedAction = "See a vet immediately",
+            Severity = "High"
+        },
+        new Disease
+        {
+            Name = "Dental Disease",
+            Description = "Periodontal disease is one of the most common conditions in adult dogs, caused by the buildup of plaque and tartar.",
+            Symptoms = "Bad breath, red or swollen gums, yellow or brown teeth, difficulty eating, and pawing at the mouth.",
+            SuggestedAction = "Schedule a dental checkup",
+            Severity = "Low"
+        },
+        new Disease
+        {
+            Name = "Allergies",
+            Description = "Dogs can have allergic reactions to food, environmental factors, or flea bites. Allergies are a common cause of skin problems.",
+            Symptoms = "Itchy skin, excessive scratching or licking, red skin, hair loss, ear infections, and hot spots.",
+            SuggestedAction = "See a vet to identify triggers",
+            Severity = "Low"
+        },
+        new Disease
+        {
+            Name = "Bloat (Gastric Dilatation-Volvulus)",
+            Description = "A life-threatening condition where the stomach fills with gas and may twist. Most common in large, deep-chested breeds.",
+            Symptoms = "Distended abdomen, unproductive retching, restlessness, excessive drooling, and signs of pain.",
+            SuggestedAction = "Emergency - see a vet immediately",
+            Severity = "High"
+        },
+        new Disease
+        {
+            Name = "Obesity",
+            Description = "Excess body weight that can lead to numerous health problems including joint issues, diabetes, and heart disease.",
+            Symptoms = "Difficulty feeling ribs, no visible waist, waddling gait, difficulty breathing, and low energy.",
+            SuggestedAction = "Consult vet for weight management plan",
+            Severity = "Moderate"
+        }
+    };
+}

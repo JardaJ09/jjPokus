@@ -1,0 +1,19 @@
+@using DogsInfo.Models
+
+<span class="badge @GetBadgeClass()">@Severity</span>
+
+@code {
+    [Parameter]
+    public string Severity { get; set; } = "Low";
+
+    private string GetBadgeClass()
+    {
+        return Severity switch
+        {
+            "Low" => "bg-success",
+            "Moderate" => "bg-warning text-dark",
+            "High" => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+}
