@@ -1,0 +1,159 @@
+@page "/breeds"
+@using DogsInfo.Models
+
+<PageTitle>Dog Breeds</PageTitle>
+
+<h1>Dog Breeds</h1>
+
+<div class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="searchBox" class="form-label">Search by name:</label>
+            <input type="text" id="searchBox" class="form-control" placeholder="Enter breed name..." @bind="searchTerm" @bind:event="oninput" />
+        </div>
+        <div class="col-md-6">
+            <label for="sizeFilter" class="form-label">Filter by size:</label>
+            <select id="sizeFilter" class="form-select" @bind="selectedSize">
+                <option value="">All Sizes</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var breed in FilteredBreeds)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@breed.ImageUrl" class="card-img-top" alt="@breed.Name" style="height: 200px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@breed.Name</h5>
+                    <p class="card-text">
+                        <strong>Origin:</strong> @breed.Origin<br />
+                        <strong>Size:</strong> <span class="badge bg-info text-dark">@breed.SizeCategory</span><br />
+                        <strong>Temperament:</strong> @breed.Temperament
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (!FilteredBreeds.Any())
+{
+    <div class="alert alert-info mt-4" role="alert">
+        No breeds found matching your criteria.
+    </div>
+}
+
+@code {
+    private string searchTerm = "";
+    private string selectedSize = "";
+
+    private List<Breed> breeds = new()
+    {
+        new Breed
+        {
+            Name = "Labrador Retriever",
+            Origin = "Canada",
+            SizeCategory = "Large",
+            Temperament = "Friendly, Active, Outgoing",
+            ImageUrl = "https://placedog.net/400/300?id=1"
+        },
+        new Breed
+        {
+            Name = "German Shepherd",
+            Origin = "Germany",
+            SizeCategory = "Large",
+            Temperament = "Confident, Courageous, Smart",
+            ImageUrl = "https://placedog.net/400/300?id=2"
+        },
+        new Breed
+        {
+            Name = "Golden Retriever",
+            Origin = "Scotland",
+            SizeCategory = "Large",
+            Temperament = "Intelligent, Friendly, Devoted",
+            ImageUrl = "https://placedog.net/400/300?id=3"
+        },
+        new Breed
+        {
+            Name = "French Bulldog",
+            Origin = "France",
+            SizeCategory = "Small",
+            Temperament = "Adaptable, Playful, Smart",
+            ImageUrl = "https://placedog.net/400/300?id=4"
+        },
+        new Breed
+        {
+            Name = "Bulldog",
+            Origin = "England",
+            SizeCategory = "Medium",
+            Temperament = "Docile, Willful, Friendly",
+            ImageUrl = "https://placedog.net/400/300?id=5"
+        },
+        new Breed
+        {
+            Name = "Poodle",
+            Origin = "Germany/France",
+            SizeCategory = "Medium",
+            Temperament = "Intelligent, Active, Alert",
+            ImageUrl = "https://placedog.net/400/300?id=6"
+        },
+        new Breed
+        {
+            Name = "Beagle",
+            Origin = "England",
+            SizeCategory = "Small",
+            Temperament = "Merry, Friendly, Curious",
+            ImageUrl = "https://placedog.net/400/300?id=7"
+        },
+        new Breed
+        {
+            Name = "Rottweiler",
+            Origin = "Germany",
+            SizeCategory = "Large",
+            Temperament = "Loyal, Confident, Loving",
+            ImageUrl = "https://placedog.net/400/300?id=8"
+        },
+        new Breed
+        {
+            Name = "Yorkshire Terrier",
+            Origin = "England",
+            SizeCategory = "Small",
+            Temperament = "Feisty, Affectionate, Spirited",
+            ImageUrl = "https://placedog.net/400/300?id=9"
+        },
+        new Breed
+        {
+            Name = "Boxer",
+            Origin = "Germany",
+            SizeCategory = "Large",
+            Temperament = "Fun-Loving, Bright, Active",
+            ImageUrl = "https://placedog.net/400/300?id=10"
+        },
+        new Breed
+        {
+            Name = "Dachshund",
+            Origin = "Germany",
+            SizeCategory = "Small",
+            Temperament = "Clever, Stubborn, Devoted",
+            ImageUrl = "https://placedog.net/400/300?id=11"
+        },
+        new Breed
+        {
+            Name = "Siberian Husky",
+            Origin = "Russia",
+            SizeCategory = "Medium",
+            Temperament = "Outgoing, Mischievous, Loyal",
+            ImageUrl = "https://placedog.net/400/300?id=12"
+        }
+    };
+
+    private IEnumerable<Breed> FilteredBreeds => breeds
+        .Where(b => string.IsNullOrEmpty(searchTerm) || b.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        .Where(b => string.IsNullOrEmpty(selectedSize) || b.SizeCategory == selectedSize);
+}
