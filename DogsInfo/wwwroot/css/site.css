@@ -1,12 +1,14 @@
-/* DogsInfo Custom Styles */
+/* DogsInfo Custom Styles - Blue, White, and Gray Theme */
 
 /* Breed Cards */
 .breed-card {
     transition: transform 0.2s ease-in-out;
+    border-color: #e2e8f0;
 }
 
 .breed-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(30, 58, 95, 0.15);
 }
 
 .breed-card img {
@@ -16,7 +18,8 @@
 
 /* Disease Accordion */
 .disease-accordion .accordion-button:not(.collapsed) {
-    background-color: rgba(27, 110, 194, 0.1);
+    background-color: rgba(37, 99, 235, 0.1);
+    color: #1e3a5f;
 }
 
 .disease-accordion .accordion-header {
@@ -24,19 +27,29 @@
     align-items: center;
 }
 
+.accordion-button {
+    color: #334155;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+}
+
 /* Filter Section */
 .filter-section {
-    background-color: #f8f9fa;
+    background-color: #f1f5f9;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
 }
 
 /* Page Headers */
 .page-header {
-    border-bottom: 2px solid #1b6ec2;
+    border-bottom: 2px solid #2563eb;
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
+    color: #1e3a5f;
 }
 
 /* Size Category Badges */
@@ -46,18 +59,58 @@
 }
 
 .size-small {
-    background-color: #17a2b8;
+    background-color: #3b82f6;
     color: white;
 }
 
 .size-medium {
-    background-color: #6c757d;
+    background-color: #64748b;
     color: white;
 }
 
 .size-large {
-    background-color: #343a40;
+    background-color: #1e3a5f;
     color: white;
+}
+
+/* Card styling */
+.card {
+    border-color: #e2e8f0;
+}
+
+.card-header.bg-success {
+    background-color: #2563eb !important;
+}
+
+.card-header.bg-danger {
+    background-color: #64748b !important;
+}
+
+.card-header.bg-primary {
+    background-color: #1e3a5f !important;
+}
+
+.card-header.bg-warning {
+    background-color: #f1f5f9 !important;
+    color: #1e3a5f !important;
+}
+
+.card-header.bg-info {
+    background-color: #3b82f6 !important;
+}
+
+.border-warning {
+    border-color: #94a3b8 !important;
+}
+
+/* Lead text */
+.lead {
+    color: #64748b;
+}
+
+/* Text muted */
+.text-muted {
+    color: #64748b !important;
 }
 
 /* Responsive adjustments */
