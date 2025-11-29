@@ -1,0 +1,197 @@
+@page "/petting"
+
+<PageTitle>How to Pet Dogs Correctly</PageTitle>
+
+<h1 class="page-header">How to Pet Dogs Correctly</h1>
+
+<p class="lead mb-4">Learn the proper techniques for petting dogs to ensure a positive experience for both you and your furry friend.</p>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h2 class="h5 mb-0">✅ Do's - Safe Petting Zones</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    @foreach (var tip in safePettingZones)
+                    {
+                        <li class="list-group-item">
+                            <strong>@tip.Zone</strong>
+                            <p class="mb-0 text-muted">@tip.Description</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h2 class="h5 mb-0">❌ Don'ts - Areas to Avoid</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    @foreach (var tip in areasToAvoid)
+                    {
+                        <li class="list-group-item">
+                            <strong>@tip.Zone</strong>
+                            <p class="mb-0 text-muted">@tip.Description</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <h2 class="h5 mb-0">🐕 Step-by-Step Guide to Petting a Dog</h2>
+    </div>
+    <div class="card-body">
+        <ol class="list-group list-group-numbered">
+            @foreach (var step in pettingSteps)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">@step.Title</div>
+                        @step.Description
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-warning">
+        <h2 class="h5 mb-0">⚠️ Signs a Dog Doesn't Want to Be Petted</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            @foreach (var sign in warningSignsGroups)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body">
+                            <h3 class="h6 card-title">@sign.Category</h3>
+                            <ul class="mb-0">
+                                @foreach (var item in sign.Signs)
+                                {
+                                    <li>@item</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-info text-white">
+        <h2 class="h5 mb-0">💡 Pro Tips for Petting Different Breeds</h2>
+    </div>
+    <div class="card-body">
+        <div class="accordion" id="breedTipsAccordion">
+            @foreach (var tip in breedPettingTips)
+            {
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="heading@(tip.Id)">
+                        <button class="accordion-button collapsed" type="button" 
+                                data-bs-toggle="collapse" data-bs-target="#collapse@(tip.Id)" 
+                                aria-expanded="false" aria-controls="collapse@(tip.Id)">
+                            @tip.BreedType
+                        </button>
+                    </h3>
+                    <div id="collapse@(tip.Id)" class="accordion-collapse collapse" 
+                         aria-labelledby="heading@(tip.Id)" data-bs-parent="#breedTipsAccordion">
+                        <div class="accordion-body">
+                            @tip.Tips
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private record PettingZone(string Zone, string Description);
+    private record PettingStep(string Title, string Description);
+    private record WarningSignsGroup(string Category, List<string> Signs);
+    private record BreedPettingTip(int Id, string BreedType, string Tips);
+
+    private List<PettingZone> safePettingZones = new()
+    {
+        new PettingZone("Chest", "Most dogs enjoy gentle strokes on their chest. It's a non-threatening area."),
+        new PettingZone("Shoulders", "Side of the shoulders is a comfortable spot for most dogs."),
+        new PettingZone("Base of Neck", "Gentle scratching at the base of the neck is often appreciated."),
+        new PettingZone("Back", "Long, gentle strokes along the back (following fur direction) are soothing."),
+        new PettingZone("Behind the Ears", "Many dogs love having the area behind their ears scratched."),
+        new PettingZone("Under the Chin", "A gentle scratch under the chin is usually welcomed by familiar dogs.")
+    };
+
+    private List<PettingZone> areasToAvoid = new()
+    {
+        new PettingZone("Top of Head", "Reaching over a dog's head can feel threatening to them."),
+        new PettingZone("Tail", "Many dogs are sensitive about their tail being touched."),
+        new PettingZone("Paws", "Unless the dog is used to it, paws can be a sensitive area."),
+        new PettingZone("Face/Muzzle", "Avoid touching a dog's face, especially unfamiliar dogs."),
+        new PettingZone("Belly", "While some dogs love belly rubs, others feel vulnerable. Wait for invitation."),
+        new PettingZone("Rear End", "This area is typically off-limits and can make dogs uncomfortable.")
+    };
+
+    private List<PettingStep> pettingSteps = new()
+    {
+        new PettingStep("Ask Permission", "Always ask the owner if it's okay to pet their dog before approaching."),
+        new PettingStep("Let the Dog Come to You", "Crouch down to their level and let the dog approach you first."),
+        new PettingStep("Offer Your Hand", "Present the back of your hand for the dog to sniff. Keep it low and non-threatening."),
+        new PettingStep("Read Body Language", "Look for relaxed body posture, wagging tail, and soft eyes before proceeding."),
+        new PettingStep("Start with Safe Zones", "Begin petting on the chest or shoulder, not the head."),
+        new PettingStep("Use Gentle Strokes", "Pet in the direction of the fur with slow, gentle movements."),
+        new PettingStep("Watch for Signals", "Continuously monitor the dog's reaction and stop if they show discomfort."),
+        new PettingStep("Know When to Stop", "Keep petting sessions short, especially with unfamiliar dogs.")
+    };
+
+    private List<WarningSignsGroup> warningSignsGroups = new()
+    {
+        new WarningSignsGroup("Body Language", new List<string> 
+        { 
+            "Stiff, rigid body",
+            "Turning away",
+            "Backing up",
+            "Lowered head"
+        }),
+        new WarningSignsGroup("Facial Cues", new List<string> 
+        { 
+            "Whale eye (showing whites)",
+            "Lip licking",
+            "Yawning",
+            "Closed mouth tightly"
+        }),
+        new WarningSignsGroup("Vocal & Other Signs", new List<string> 
+        { 
+            "Growling",
+            "Raised hackles",
+            "Tucked tail",
+            "Moving away repeatedly"
+        })
+    };
+
+    private List<BreedPettingTip> breedPettingTips = new()
+    {
+        new BreedPettingTip(1, "Small Breeds (Chihuahua, Yorkshire Terrier)", 
+            "Approach slowly and get down to their level. Small dogs can feel intimidated by people towering over them. Use gentle, light touches and avoid sudden movements."),
+        new BreedPettingTip(2, "Large Breeds (Labrador, German Shepherd)", 
+            "Large dogs often appreciate firmer strokes. They may lean into you for more pressure. Be mindful of their strength and ensure they remain calm."),
+        new BreedPettingTip(3, "Double-Coated Breeds (Husky, Golden Retriever)", 
+            "These dogs often enjoy deeper scratching that reaches through their thick coat. Focus on areas prone to matting like behind ears and chest."),
+        new BreedPettingTip(4, "Short-Haired Breeds (Boxer, Beagle)", 
+            "Gentle strokes work well. These dogs may be more sensitive to touch due to less fur protection. Avoid rough handling."),
+        new BreedPettingTip(5, "Senior Dogs", 
+            "Older dogs may have arthritis or sensitive spots. Be extra gentle, avoid sudden movements, and let them guide you to where they want to be petted.")
+    };
+}
