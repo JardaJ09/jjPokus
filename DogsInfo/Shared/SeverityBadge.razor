@@ -1,0 +1,20 @@
+@* SeverityBadge.razor - Reusable component for disease severity display *@
+
+<span class="badge @GetBadgeClass()" role="status" aria-label="Severity: @Severity">@Severity</span>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public string Severity { get; set; } = string.Empty;
+
+    private string GetBadgeClass()
+    {
+        return Severity?.ToLower() switch
+        {
+            "low" => "bg-success",
+            "moderate" => "bg-warning text-dark",
+            "high" => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+}

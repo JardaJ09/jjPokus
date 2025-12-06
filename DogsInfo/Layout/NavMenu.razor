@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark px-3 py-2">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="">🐕 DogsInfo</a>
+        <button title="Navigation menu" class="navbar-toggler rounded-pill" type="button" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="@NavMenuCssClass navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <NavLink class="nav-link px-3" href="" Match="NavLinkMatch.All">
+                        Home
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link px-3" href="breeds">
+                        Dog Breeds
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link px-3" href="diseases">
+                        Dog Diseases
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link px-3" href="petting">
+                        How to Pet Dogs
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link px-3" href="contacts">
+                        Contacts
+                    </NavLink>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

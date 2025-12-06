@@ -1,0 +1,232 @@
+/* DogsInfo Custom Styles - Blue, White, and Gray Theme with Rounded Design */
+
+/* Global rounded corners */
+.card {
+    border-radius: 1rem !important;
+    border-color: #e2e8f0;
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+.btn {
+    border-radius: 0.75rem !important;
+}
+
+.form-control, .form-select {
+    border-radius: 0.75rem !important;
+}
+
+.badge {
+    border-radius: 0.5rem !important;
+}
+
+.alert {
+    border-radius: 1rem !important;
+}
+
+/* Breed Cards */
+.breed-card {
+    transition: transform 0.2s ease-in-out;
+    border-color: #e2e8f0;
+    border-radius: 1rem !important;
+}
+
+.breed-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(30, 58, 95, 0.15);
+}
+
+.breed-card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+/* Disease Accordion */
+.accordion {
+    border-radius: 1rem !important;
+    overflow: hidden;
+}
+
+.accordion-item {
+    border-radius: 0 !important;
+}
+
+.accordion-item:first-of-type {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+.accordion-item:last-of-type {
+    border-radius: 0 0 1rem 1rem !important;
+}
+
+.accordion-button {
+    color: #334155;
+    border-radius: 0 !important;
+}
+
+.accordion-item:first-of-type .accordion-button {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+.disease-accordion .accordion-button:not(.collapsed) {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: #1e3a5f;
+}
+
+.disease-accordion .accordion-header {
+    display: flex;
+    align-items: center;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+}
+
+/* Filter Section */
+.filter-section {
+    background-color: rgba(241, 245, 249, 0.9);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
+    backdrop-filter: blur(10px);
+}
+
+/* Page Headers */
+.page-header {
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: #1e3a5f;
+}
+
+/* Size Category Badges */
+.size-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.5rem !important;
+}
+
+.size-small {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.size-medium {
+    background-color: #64748b;
+    color: white;
+}
+
+.size-large {
+    background-color: #1e3a5f;
+    color: white;
+}
+
+/* Card header colors */
+.card-header.bg-success {
+    background-color: #2563eb !important;
+}
+
+.card-header.bg-danger {
+    background-color: #64748b !important;
+}
+
+.card-header.bg-primary {
+    background-color: #1e3a5f !important;
+}
+
+.card-header.bg-warning {
+    background-color: #f1f5f9 !important;
+    color: #1e3a5f !important;
+}
+
+.card-header.bg-info {
+    background-color: #3b82f6 !important;
+}
+
+.border-warning {
+    border-color: #94a3b8 !important;
+}
+
+/* Lead text */
+.lead {
+    color: #64748b;
+}
+
+/* Text muted */
+.text-muted {
+    color: #64748b !important;
+}
+
+/* List groups */
+.list-group {
+    border-radius: 1rem !important;
+}
+
+.list-group-item:first-child {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+.list-group-item:last-child {
+    border-radius: 0 0 1rem 1rem !important;
+}
+
+/* Images in cards */
+.card-img-top {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+/* Contact Cards */
+.contact-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(30, 58, 95, 0.15);
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 auto;
+}
+
+.contact-icon {
+    margin-right: 0.5rem;
+}
+
+.contact-info a {
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-section {
+        padding: 1rem;
+        border-radius: 0.75rem;
+    }
+    
+    .breed-card img {
+        height: 150px;
+    }
+    
+    .card {
+        border-radius: 0.75rem !important;
+    }
+}

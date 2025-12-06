@@ -1,0 +1,138 @@
+@page "/contacts"
+
+<PageTitle>Contacts - DogsInfo</PageTitle>
+
+<h1 class="page-header">Contact Us</h1>
+
+<p class="lead mb-4">Get in touch with our team of dog experts. We're here to help!</p>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var contact in contacts)
+    {
+        <div class="col">
+            <div class="card h-100 contact-card">
+                <div class="card-body text-center">
+                    <div class="contact-avatar mb-3">
+                        <div class="avatar-circle" style="background-color: @contact.AvatarColor">
+                            @contact.Initials
+                        </div>
+                    </div>
+                    <h5 class="card-title mb-1">@contact.Name</h5>
+                    <p class="text-muted small mb-3">@contact.Role</p>
+                    <div class="contact-info">
+                        <p class="mb-2">
+                            <span class="contact-icon">📧</span>
+                            <a href="mailto:@contact.Email">@contact.Email</a>
+                        </p>
+                        <p class="mb-2">
+                            <span class="contact-icon">📱</span>
+                            <a href="tel:@contact.Phone">@contact.Phone</a>
+                        </p>
+                        <p class="mb-0">
+                            <span class="contact-icon">📍</span>
+                            @contact.Location
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center pb-3">
+                    <span class="badge bg-primary rounded-pill">@contact.Specialty</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="card mt-5">
+    <div class="card-header bg-primary text-white">
+        <h2 class="h5 mb-0">📬 General Inquiries</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h6>Office Address</h6>
+                <p class="text-muted">
+                    DogsInfo Headquarters<br>
+                    123 Paw Street, Suite 456<br>
+                    Pet City, CA 90210<br>
+                    United States
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h6>Business Hours</h6>
+                <p class="text-muted">
+                    Monday - Friday: 9:00 AM - 6:00 PM<br>
+                    Saturday: 10:00 AM - 4:00 PM<br>
+                    Sunday: Closed
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private record Contact(string Name, string Role, string Email, string Phone, string Location, string Specialty, string AvatarColor, string Initials);
+
+    private List<Contact> contacts = new()
+    {
+        new Contact(
+            "Dr. Sarah Mitchell",
+            "Veterinary Consultant",
+            "sarah.mitchell@dogsinfo.com",
+            "+1 (555) 234-5678",
+            "Los Angeles, CA",
+            "Dog Health",
+            "#2563eb",
+            "SM"
+        ),
+        new Contact(
+            "James Peterson",
+            "Dog Behavior Specialist",
+            "james.peterson@dogsinfo.com",
+            "+1 (555) 345-6789",
+            "New York, NY",
+            "Behavior Training",
+            "#1e3a5f",
+            "JP"
+        ),
+        new Contact(
+            "Emily Rodriguez",
+            "Breed Expert",
+            "emily.rodriguez@dogsinfo.com",
+            "+1 (555) 456-7890",
+            "Chicago, IL",
+            "Breed Information",
+            "#3b82f6",
+            "ER"
+        ),
+        new Contact(
+            "Dr. Michael Chen",
+            "Canine Nutritionist",
+            "michael.chen@dogsinfo.com",
+            "+1 (555) 567-8901",
+            "San Francisco, CA",
+            "Dog Nutrition",
+            "#64748b",
+            "MC"
+        ),
+        new Contact(
+            "Amanda Foster",
+            "Customer Support Lead",
+            "amanda.foster@dogsinfo.com",
+            "+1 (555) 678-9012",
+            "Austin, TX",
+            "Customer Care",
+            "#4a6fa5",
+            "AF"
+        ),
+        new Contact(
+            "Robert Williams",
+            "Training Coordinator",
+            "robert.williams@dogsinfo.com",
+            "+1 (555) 789-0123",
+            "Seattle, WA",
+            "Obedience Training",
+            "#1d4ed8",
+            "RW"
+        )
+    };
+}

@@ -1,0 +1,90 @@
+@page "/breeds"
+@using DogsInfo.Models
+
+<PageTitle>Dog Breeds</PageTitle>
+
+<h1 class="page-header">Dog Breeds</h1>
+
+<div class="filter-section">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="searchInput" class="form-label">Search by name</label>
+            <input type="text" class="form-control" id="searchInput" placeholder="Search breeds..." 
+                   @bind="searchTerm" @bind:event="oninput" aria-describedby="searchHelp" />
+            <div id="searchHelp" class="form-text">Filter breeds by typing their name</div>
+        </div>
+        <div class="col-md-6">
+            <label for="sizeFilter" class="form-label">Filter by size</label>
+            <select class="form-select" id="sizeFilter" @bind="sizeFilter" aria-describedby="sizeHelp">
+                <option value="">All Sizes</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+            <div id="sizeHelp" class="form-text">Filter breeds by size category</div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var breed in FilteredBreeds)
+    {
+        <div class="col">
+            <article class="card breed-card h-100 shadow-sm">
+                <img src="@breed.ImageUrl" class="card-img-top" alt="@breed.Name dog breed" loading="lazy" />
+                <div class="card-body">
+                    <h2 class="card-title h5">@breed.Name</h2>
+                    <p class="card-text">
+                        <span class="badge size-badge @GetSizeClass(breed.SizeCategory)" aria-label="Size: @breed.SizeCategory">@breed.SizeCategory</span>
+                    </p>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Origin</dt>
+                        <dd class="col-sm-8">@breed.Origin</dd>
+                        <dt class="col-sm-4">Temperament</dt>
+                        <dd class="col-sm-8">@breed.Temperament</dd>
+                    </dl>
+                </div>
+            </article>
+        </div>
+    }
+</div>
+
+@if (!FilteredBreeds.Any())
+{
+    <div class="alert alert-info" role="alert">
+        No breeds found matching your search criteria.
+    </div>
+}
+
+@code {
+    private string searchTerm = string.Empty;
+    private string sizeFilter = string.Empty;
+
+    private List<Breed> breeds = new()
+    {
+        new Breed { Id = 1, Name = "Labrador Retriever", Origin = "Canada", SizeCategory = "Large", Temperament = "Friendly, Active, Outgoing", ImageUrl = "https://placehold.co/400x300/1a5276/ffffff?text=Labrador" },
+        new Breed { Id = 2, Name = "German Shepherd", Origin = "Germany", SizeCategory = "Large", Temperament = "Confident, Courageous, Smart", ImageUrl = "https://placehold.co/400x300/1e8449/ffffff?text=German+Shepherd" },
+        new Breed { Id = 3, Name = "Golden Retriever", Origin = "Scotland", SizeCategory = "Large", Temperament = "Intelligent, Friendly, Devoted", ImageUrl = "https://placehold.co/400x300/b7950b/ffffff?text=Golden+Retriever" },
+        new Breed { Id = 4, Name = "French Bulldog", Origin = "France", SizeCategory = "Small", Temperament = "Playful, Adaptable, Smart", ImageUrl = "https://placehold.co/400x300/6c3483/ffffff?text=French+Bulldog" },
+        new Breed { Id = 5, Name = "Beagle", Origin = "England", SizeCategory = "Medium", Temperament = "Friendly, Curious, Merry", ImageUrl = "https://placehold.co/400x300/a04000/ffffff?text=Beagle" },
+        new Breed { Id = 6, Name = "Poodle", Origin = "Germany/France", SizeCategory = "Medium", Temperament = "Intelligent, Active, Alert", ImageUrl = "https://placehold.co/400x300/117a65/ffffff?text=Poodle" },
+        new Breed { Id = 7, Name = "Chihuahua", Origin = "Mexico", SizeCategory = "Small", Temperament = "Charming, Graceful, Sassy", ImageUrl = "https://placehold.co/400x300/c0392b/ffffff?text=Chihuahua" },
+        new Breed { Id = 8, Name = "Siberian Husky", Origin = "Siberia", SizeCategory = "Medium", Temperament = "Loyal, Outgoing, Mischievous", ImageUrl = "https://placehold.co/400x300/2471a3/ffffff?text=Siberian+Husky" },
+        new Breed { Id = 9, Name = "Yorkshire Terrier", Origin = "England", SizeCategory = "Small", Temperament = "Affectionate, Sprightly, Tomboyish", ImageUrl = "https://placehold.co/400x300/884ea0/ffffff?text=Yorkshire+Terrier" },
+        new Breed { Id = 10, Name = "Rottweiler", Origin = "Germany", SizeCategory = "Large", Temperament = "Loyal, Confident, Loving", ImageUrl = "https://placehold.co/400x300/1c2833/ffffff?text=Rottweiler" },
+        new Breed { Id = 11, Name = "Boxer", Origin = "Germany", SizeCategory = "Large", Temperament = "Fun-Loving, Bright, Active", ImageUrl = "https://placehold.co/400x300/d68910/ffffff?text=Boxer" },
+        new Breed { Id = 12, Name = "Dachshund", Origin = "Germany", SizeCategory = "Small", Temperament = "Clever, Stubborn, Devoted", ImageUrl = "https://placehold.co/400x300/7b241c/ffffff?text=Dachshund" }
+    };
+
+    private IEnumerable<Breed> FilteredBreeds => breeds
+        .Where(b => string.IsNullOrEmpty(searchTerm) || b.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        .Where(b => string.IsNullOrEmpty(sizeFilter) || b.SizeCategory.Equals(sizeFilter, StringComparison.OrdinalIgnoreCase));
+
+    private string GetSizeClass(string size) => size?.ToLower() switch
+    {
+        "small" => "size-small",
+        "medium" => "size-medium",
+        "large" => "size-large",
+        _ => "bg-secondary"
+    };
+}
